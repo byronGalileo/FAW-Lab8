@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {ToolbarComponent} from './components/toolbar/toolbar.component';
+import {FormularioComponent} from './components/formulario/formulario.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet,MatSlideToggleModule,ToolbarComponent,FormularioComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

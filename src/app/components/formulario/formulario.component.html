@@ -1,0 +1,25 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Formulario</mat-card-title>
+      <mat-card-subtitle>Mascota</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-form-field>
+            <mat-label>Nombre Mascota</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <br>
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">Perro</mat-radio-button>
+            <mat-radio-button value="2">Gato</mat-radio-button>
+            <mat-radio-button value="3">Hamster</mat-radio-button>
+
+        </mat-radio-group>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="openDialog('0ms', '0ms')">Open dialog without animation</button>
+    </mat-card-actions>
+</mat-card>
+  <br>
+
+  
