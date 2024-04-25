@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component,Output, EventEmitter } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
@@ -14,34 +15,64 @@ import {
   MatDialogTitle,
   MatDialogContent,
 } from '@angular/material/dialog';
-
+import {Dialog} from './dialog.component';
+import { Mascotas } from "../../models/mascotas.model"
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-formulario',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule,MatFormFieldModule, 
-            MatInputModule, MatIconModule,MatSelectModule,MatRadioModule,MatButtonModule],
+  imports: [MatCardModule,
+            MatButtonModule,
+            MatFormFieldModule, 
+            MatInputModule,
+            MatIconModule,
+            MatSelectModule,
+            MatRadioModule,
+            ReactiveFormsModule
+          ],
   templateUrl: './formulario.component.html',
   styleUrl: './formulario.component.css'
 })
 export class FormularioComponent {
-  constructor(public dialog: MatDialog) {}
+  nombre = new FormControl();
+  tipo   = new FormControl();
+  id = 1;
+
+  @Output() newItemEvent = new EventEmitter<Mascotas>();
+
+  
+
+  constructor(public dialog: MatDialog,private share: SharedService) {}
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(DialogAnimationsExampleDialog, {
-      width: '250px',
-      enterAnimationDuration,
-      exitAnimationDuration,
-    });
+   const dialogRef =  this.dialog.open(Dialog, {
+    width: '250px',
+    enterAnimationDuration,
+    exitAnimationDuration,
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    
+    if(result){
+      console.log("entra");
+      const nombre = this.nombre.value;
+      const tipo = this.tipo.value;
+      // this.newItemEvent.emit(new Mascotas(this.id ++, nombre ,tipo));
+      this.share.addMascota(new Mascotas(this.id ++, nombre ,tipo));
+    }
+  });
+  }
+
+  
+  
+  
+
+  addItem(){
+    console.log(this.nombre);
+    console.log(this.tipo);
+    console.log("Hola");
   }
 }
 
-@Component({
-  selector: 'dialog-animations-example-dialog',
-  templateUrl: './dialog-animations-example-dialog.html',
-  standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
-})
-export class DialogAnimationsExampleDialog {
-  constructor(public dialogRef: MatDialogRef<DialogAnimationsExampleDialog>) {}
-}
+

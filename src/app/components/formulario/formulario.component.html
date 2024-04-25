@@ -1,3 +1,5 @@
+<!-- <app (newItemEvent)="addItem($event)"></app-convertion> -->
+<!-- <dialog (addItem)="addItem()"></dialog> -->
 <mat-card>
     <mat-card-header>
       <mat-card-title>Formulario</mat-card-title>
@@ -6,13 +8,13 @@
     <mat-card-content>
         <mat-form-field>
             <mat-label>Nombre Mascota</mat-label>
-            <input matInput>
+            <input matInput  [formControl]="nombre">
         </mat-form-field>
         <br>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Perro</mat-radio-button>
-            <mat-radio-button value="2">Gato</mat-radio-button>
-            <mat-radio-button value="3">Hamster</mat-radio-button>
+        <mat-radio-group aria-label="Selecciona el tipo" [formControl]="tipo">
+            <mat-radio-button value="Perro">Perro</mat-radio-button>
+            <mat-radio-button value="Gato">Gato</mat-radio-button>
+            <mat-radio-button value="Hamster">Hamster</mat-radio-button>
 
         </mat-radio-group>
     </mat-card-content>
